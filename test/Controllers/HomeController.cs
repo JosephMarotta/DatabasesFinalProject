@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using Dapper;
 using Oracle.ManagedDataAccess.Client;
+using test.Models;
 
 namespace test.Controllers
 {
@@ -14,10 +15,11 @@ namespace test.Controllers
         // GET: Home
         public ActionResult Index()
         {
-            string conString = "User Id=system;Password=furgpet1;Data Source=DESKTOP-NGUAH05";
+            List<Borrower> Borrowers = new List<Borrower>();
+
+            string conString = "User Id=system;Password=furgpet1;Data Source=LAPTOP-JOE";
             OracleConnection conn = new OracleConnection(conString);
             conn.Open();
-            string temp = ""; 
             string sqlCmd = "select * from BORROWER";
             OracleCommand cmd = new OracleCommand(sqlCmd, conn);
             cmd.CommandType = CommandType.Text;
@@ -27,22 +29,23 @@ namespace test.Controllers
             {
                 while (reader.Read())
                 {
-                    temp = reader.GetString(0);
-                    temp = reader.GetString(1);
-                    temp = reader.GetString(2);
-                    temp = reader.GetString(3);
-                    temp = reader.GetString(4);
+                    Borrowers.Add(new Borrower(
+                     reader.GetString(0),
+                     reader.GetString(1),
+                     reader.GetString(2),
+                     reader.GetString(3),
+                     reader.GetString(4)
+                    ));
                 }
             }
             else
             {
             }
             reader.Close();
-
-
             conn.Close();
             conn.Dispose();
-            return View();
+
+            return View(Borrowers.ToList());
         }
     }
 }

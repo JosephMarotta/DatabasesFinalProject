@@ -1,4 +1,4 @@
-﻿
+﻿@model IEnumerable<test.Models.Borrower>
 @{
     Layout = null;
 }
@@ -11,7 +11,27 @@
     <title>Index</title>
 </head>
 <body>
-    <div> 
-    </div>
+    <table>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CardNo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Address)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PhoneNo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Password)
+                </td>
+            </tr>
+        }
+    </table>
 </body>
 </html>
