@@ -10,9 +10,23 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
-    <div> 
-        Please Login
-
+    <div>
+        <div>
+            <form action="/Home/LoginBorrower" method="post">
+                <fieldset>
+                    <legend>Please Login:</legend>
+                    Card Number : <input type="text" name="cardNo" />
+                    Password : <input type="password" name="password" />
+                    <input type="submit" value="Submit" />
+                </fieldset>
+            </form>
+        </div>
+        <div>
+            <h4 style="color: red;">@ViewBag.Message</h4>
+        </div>
+        <div>
+            Dont have an account? Register here
+        </div>
     </div>
 </body>
 </html>

@@ -31,11 +31,27 @@ namespace test.Controllers
         }
 
         // GET: Home
-        public ActionResult Login()
+        [Route("Home/Login/{message?}")]
+        public ActionResult Login(string message = null)
         {
-            List<Borrower> Borrowers = _BorrowerService.GetBorrowers();
+            ViewBag.Message = message; 
 
             return View();
+        }
+
+        [HttpPost]
+        public ActionResult LoginBorrower(string cardNo, string password)
+        {
+            bool Success = _BorrowerService.TryLogin(cardNo, password);
+
+            if (Success)
+            {
+                return RedirectToAction("/Index");
+            }
+            else
+            {
+                return RedirectToAction("/Login", new { message = "Error Logging In User." });
+            }
         }
     }
 }

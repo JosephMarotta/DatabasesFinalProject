@@ -45,5 +45,50 @@ namespace test.Services
 
             return Borrowers;
         }
+
+        // Method for checking if a borrower is in the database
+        // used for logging in a borrower
+        public bool TryLogin(string cardNo, string password)
+        {
+            Borrower borrower = new Borrower(); 
+
+            string conString = "User Id=system;Password=furgpet1;Data Source=LAPTOP-JOE";
+            OracleConnection conn = new OracleConnection(conString);
+            conn.Open();
+            string sqlCmd = "select * from BORROWER where CARDNO = '" + cardNo + "'";
+            OracleCommand cmd = new OracleCommand(sqlCmd, conn);
+            cmd.CommandType = CommandType.Text;
+
+            OracleDataReader reader = cmd.ExecuteReader();
+            if (reader.HasRows)
+            {
+                while (reader.Read())
+                {
+                    borrower = new Borrower(
+                     reader.GetString(0),
+                     reader.GetString(1),
+                     reader.GetString(2),
+                     reader.GetString(3),
+                     reader.GetString(4)
+                    );
+                }
+            }
+            else
+            {
+                // Borrower not in database
+            }
+            reader.Close();
+            conn.Close();
+            conn.Dispose();
+
+            if (password.Equals(borrower.Password))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
     }
 }

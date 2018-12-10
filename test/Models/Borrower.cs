@@ -13,6 +13,8 @@ namespace test.Models
         public string PhoneNo { get; set; }
         public string Password { get; set; }
 
+        public Borrower(){ }
+
         public Borrower(string cardNo, string name, string address, string phone, string password)
         {
             CardNo = cardNo;
