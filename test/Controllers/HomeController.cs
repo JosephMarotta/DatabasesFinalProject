@@ -7,45 +7,35 @@ using System.Web.Mvc;
 using Dapper;
 using Oracle.ManagedDataAccess.Client;
 using test.Models;
+using test.Services;
 
 namespace test.Controllers
 {
     public class HomeController : Controller
     {
+        private BorrowerService _BorrowerService;
+        private BookService _BookService;
+
+        public HomeController()
+        {
+            _BorrowerService = new BorrowerService();
+            _BookService = new BookService();
+        }
+
         // GET: Home
         public ActionResult Index()
         {
-            List<Borrower> Borrowers = new List<Borrower>();
+            List<Book> Books = _BookService.GetBooks(); 
 
-            string conString = "User Id=system;Password=furgpet1;Data Source=LAPTOP-JOE";
-            OracleConnection conn = new OracleConnection(conString);
-            conn.Open();
-            string sqlCmd = "select * from BORROWER";
-            OracleCommand cmd = new OracleCommand(sqlCmd, conn);
-            cmd.CommandType = CommandType.Text;
+            return View(Books.ToList());
+        }
 
-            OracleDataReader reader = cmd.ExecuteReader();
-            if (reader.HasRows)
-            {
-                while (reader.Read())
-                {
-                    Borrowers.Add(new Borrower(
-                     reader.GetString(0),
-                     reader.GetString(1),
-                     reader.GetString(2),
-                     reader.GetString(3),
-                     reader.GetString(4)
-                    ));
-                }
-            }
-            else
-            {
-            }
-            reader.Close();
-            conn.Close();
-            conn.Dispose();
+        // GET: Home
+        public ActionResult Login()
+        {
+            List<Borrower> Borrowers = _BorrowerService.GetBorrowers();
 
-            return View(Borrowers.ToList());
+            return View();
         }
     }
 }
