@@ -23,9 +23,10 @@ namespace test.Controllers
         }
 
         // GET: Home
-        public ActionResult Index()
+        public ActionResult Index(string CardNo)
         {
-            List<Book> Books = _BookService.GetBooks(); 
+            ViewBag.CurrentUser = _BorrowerService.GetBorrower(CardNo);
+            List<Book> Books = _BookService.GetBooks();
 
             return View(Books.ToList());
         }
@@ -45,13 +46,16 @@ namespace test.Controllers
             bool Success = _BorrowerService.TryLogin(cardNo, password);
 
             if (Success)
-            {
-                return RedirectToAction("/Index");
-            }
+                return RedirectToAction("/Index/", new { CardNo = cardNo });
             else
-            {
-                return RedirectToAction("/Login", new { message = "Error Logging In User." });
-            }
+                return RedirectToAction("/Login", new { message = "Incorrect Card Number or Password. Please try again" });
+        }
+
+        // GET: Home
+        public ActionResult Register()
+        {
+
+            return View();
         }
     }
 }
