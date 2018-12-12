@@ -35,7 +35,7 @@ namespace test.Controllers
         [Route("Home/Login/{message?}")]
         public ActionResult Login(string message = null)
         {
-            ViewBag.Message = message; 
+            ViewBag.Message = message;
 
             return View();
         }
@@ -54,6 +54,20 @@ namespace test.Controllers
         // GET: Home
         public ActionResult Register()
         {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult RegisterBorrower(string name, string address, string phoneNo, string password)
+        {
+            Borrower test = _BorrowerService.RegisterBorrower(name, address, phoneNo, password);
+
+            return RedirectToAction("/Success/", new { CardNo = test.CardNo });
+        }
+
+        public ActionResult Success(string CardNo)
+        {
+            ViewBag.CurrentUser = _BorrowerService.GetBorrower(CardNo);
 
             return View();
         }

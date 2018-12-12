@@ -53,7 +53,7 @@ namespace test.Services
             string conString = "User Id=system;Password=furgpet1;Data Source=LAPTOP-JOE";
             OracleConnection conn = new OracleConnection(conString);
             conn.Open();
-            string sqlCmd = "select * from BORROWER where CARDNO = '" + cardNo + "'";
+            string sqlCmd = $"SELECT * FROM BORROWER WHERE CARDNO = '{cardNo}'";
             OracleCommand cmd = new OracleCommand(sqlCmd, conn);
             cmd.CommandType = CommandType.Text;
 
@@ -91,7 +91,7 @@ namespace test.Services
             string conString = "User Id=system;Password=furgpet1;Data Source=LAPTOP-JOE";
             OracleConnection conn = new OracleConnection(conString);
             conn.Open();
-            string sqlCmd = "select * from BORROWER where CARDNO = '" + cardNo + "'";
+            string sqlCmd = $"SELECT * FROM BORROWER WHERE CARDNO = '{cardNo}'";
             OracleCommand cmd = new OracleCommand(sqlCmd, conn);
             cmd.CommandType = CommandType.Text;
 
@@ -125,6 +125,46 @@ namespace test.Services
             {
                 return false;
             }
+        }
+
+        public Borrower RegisterBorrower(string name, string address, string phoneNo, string password)
+        {
+            Borrower borrower = new Borrower();
+
+            string conString = "User Id=system;Password=furgpet1;Data Source=LAPTOP-JOE";
+            OracleConnection conn = new OracleConnection(conString);
+            conn.Open();
+            string sqlCmd = $"INSERT INTO BORROWER VALUES(borrower_seq.nextval, '{name}', '{address}', '{phoneNo}', '{password}')";
+            OracleCommand cmd = new OracleCommand(sqlCmd, conn);
+            cmd.CommandType = CommandType.Text;
+            OracleDataReader reader = cmd.ExecuteReader();
+            reader.Close();
+            sqlCmd = $" SELECT * FROM BORROWER WHERE NAME = '{name}' AND ADDRESS = '{address}' AND PHONE = '{phoneNo}'";
+            cmd = new OracleCommand(sqlCmd, conn);
+            cmd.CommandType = CommandType.Text;
+            reader = cmd.ExecuteReader();
+            if (reader.HasRows)
+            {
+                while (reader.Read())
+                {
+                    borrower = new Borrower(
+                     reader.GetString(0),
+                     reader.GetString(1),
+                     reader.GetString(2),
+                     reader.GetString(3),
+                     reader.GetString(4)
+                    );
+                }
+            }
+            else
+            {
+                // Borrower failed to be created
+            }
+            reader.Close();
+            conn.Close();
+            conn.Dispose();
+
+            return borrower;
         }
     }
 }
