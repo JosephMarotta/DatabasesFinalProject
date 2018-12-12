@@ -45,7 +45,8 @@ namespace test.Services
 
             return Borrowers;
         }
-
+        
+        // Method for retrieving a borrower from the database
         public Borrower GetBorrower(string cardNo)
         {
             Borrower borrower = new Borrower();
@@ -81,9 +82,8 @@ namespace test.Services
 
             return borrower; 
         }
-
-        // Method for checking if a borrower is in the database
-        // used for logging in a borrower
+        
+        // Method for logging in a borrower
         public bool TryLogin(string cardNo, string password)
         {
             Borrower borrower = new Borrower(); 
@@ -127,6 +127,7 @@ namespace test.Services
             }
         }
 
+        // Method for Adding a Borrower to the database
         public Borrower RegisterBorrower(string name, string address, string phoneNo, string password)
         {
             Borrower borrower = new Borrower();
@@ -139,6 +140,7 @@ namespace test.Services
             cmd.CommandType = CommandType.Text;
             OracleDataReader reader = cmd.ExecuteReader();
             reader.Close();
+
             sqlCmd = $" SELECT * FROM BORROWER WHERE NAME = '{name}' AND ADDRESS = '{address}' AND PHONE = '{phoneNo}'";
             cmd = new OracleCommand(sqlCmd, conn);
             cmd.CommandType = CommandType.Text;

@@ -96,6 +96,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
+    <Content Include="Styles\IndexStyles.css" />
     <Content Include="Styles\LoginStyles.css" />
     <Content Include="Styles\MasterStyles.css" />
     <Content Include="Web.config" />

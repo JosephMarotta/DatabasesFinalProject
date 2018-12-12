@@ -4,3 +4,7 @@ body {
     padding-top: 2rem;
     padding-bottom: 2rem;
 }
+
+.container {
+    max-width: 1200px;
+}

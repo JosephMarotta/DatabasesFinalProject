@@ -1,7 +1,4 @@
 ﻿@model IEnumerable<test.Models.Book>
-@{
-    Layout = null;
-}
 
 <!DOCTYPE html>
 
@@ -13,44 +10,33 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
           integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link href="~/Styles/MasterStyles.css" rel="stylesheet" />
+    <link href="~/Styles/IndexStyles.css" rel="stylesheet" />
 </head>
 <body>
-    <!-- Header-->
-    <div class="row">
-        <div class="col-lg-2"></div>
-        <div class="col-lg-6">
-            <h3> Welcome to the Library @ViewBag.CurrentUser.Name!</h3>
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+        <div class="navbar-brand">The Library Web Application</div>
+        <button class="btn btn-outline-success my-2 my-sm-0" onclick="location.href = '/home/login';">Log Out</button>
+    </nav>
+    <div class="container">
+        <!-- Header-->
+        <div class="row">
+            <h3> Welcome to the Library, @ViewBag.CurrentUser.Name!</h3>
         </div>
-    </div>
-    <!-- Table of Books-->
-    <div class="row">
-        <div class="col-lg-2"></div>
-        <div class="col-lg-6">
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th> ID </th>
-                        <th> TITLE </th>
-                        <th> PUBLISHER </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var item in Model)
-                    {
-                        <tr>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Id)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Title)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Publisher)
-                            </td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
+        <br />
+        <!-- Body-->
+        <div class="row index-body">
+            <!-- User Functions -->
+            <div class="col-sm-6 Profile">
+                <h5> Your Profile </h5>
+            </div>
+            <div class="col-sm-2"></div>
+            <!-- Library Functions -->
+            <div class="col-sm-4 Library">
+                <h5> Library Functions </h5>
+                <button class="btn btn-lg btn-basic btn-block">Books</button>
+                <button class="btn btn-lg btn-info btn-block">Branches</button>
+                <button class="btn btn-lg btn-primary btn-block">Borrowers</button>
+            </div>
         </div>
     </div>
 

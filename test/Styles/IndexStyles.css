@@ -1,0 +1,38 @@
+﻿
+body {
+
+}
+
+.navbar-brand {
+    margin-left: 40px;
+}
+
+.btn-outline-success {
+    position: absolute;
+    right: 70px;
+}
+
+.container {
+    padding-top: 40px;
+}
+
+.index-body {
+    background-color: lightgray;
+    border-radius: 10px;
+}
+
+.Profile {
+    background-color: lightblue;
+    border-radius: 10px;
+}
+
+.Library {
+    background-color: lightsteelblue;
+    border-radius: 10px;
+}
+
+.Library .btn{
+    max-width: 250px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
