@@ -15,7 +15,7 @@ namespace test.Services
         {
             List<Borrower> Borrowers = new List<Borrower>();
 
-            string conString = "User Id=system;Password=furgpet1;Data Source=LAPTOP-JOE";
+            string conString = "User Id=myers;Password=006124432;Data Source=dataserv.mscs.mu.edu:1521/orcl";
             OracleConnection conn = new OracleConnection(conString);
             conn.Open();
             string sqlCmd = "select * from BORROWER";
@@ -51,7 +51,7 @@ namespace test.Services
         {
             Borrower borrower = new Borrower();
 
-            string conString = "User Id=system;Password=furgpet1;Data Source=LAPTOP-JOE";
+            string conString = "User Id=myers;Password=006124432;Data Source=dataserv.mscs.mu.edu:1521/orcl";
             OracleConnection conn = new OracleConnection(conString);
             conn.Open();
             string sqlCmd = $"SELECT * FROM BORROWER WHERE CARDNO = '{cardNo}'";
@@ -86,9 +86,9 @@ namespace test.Services
         // Method for logging in a borrower
         public bool TryLogin(string cardNo, string password)
         {
-            Borrower borrower = new Borrower(); 
+            Borrower borrower = new Borrower();
 
-            string conString = "User Id=system;Password=furgpet1;Data Source=LAPTOP-JOE";
+            string conString = "User Id=myers;Password=006124432;Data Source=dataserv.mscs.mu.edu:1521/orcl";
             OracleConnection conn = new OracleConnection(conString);
             conn.Open();
             string sqlCmd = $"SELECT * FROM BORROWER WHERE CARDNO = '{cardNo}'";
@@ -132,7 +132,7 @@ namespace test.Services
         {
             Borrower borrower = new Borrower();
 
-            string conString = "User Id=system;Password=furgpet1;Data Source=LAPTOP-JOE";
+            string conString = "User Id=myers;Password=006124432;Data Source=dataserv.mscs.mu.edu:1521/orcl";
             OracleConnection conn = new OracleConnection(conString);
             conn.Open();
             string sqlCmd = $"INSERT INTO BORROWER VALUES(borrower_seq.nextval, '{name}', '{address}', '{phoneNo}', '{password}')";

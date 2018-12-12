@@ -1,0 +1,35 @@
+﻿@model IEnumerable<test.Models.Book>
+@{
+    ViewBag.Title = "Books";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Books</title>
+</head>
+<body>
+    <div> <b>Available Books</b><br /><div>
+        <table class="table table-bordered table-responsive table-hover">
+            <tr>
+                <th>Id</th>
+                <th>Title</th>
+                <th>Publisher</th>
+            </tr>
+            @foreach (var d in Model)
+            {
+                <tr>
+                <td>@d.Id</td>
+                <td>@d.Title</td>
+                <td>@d.Publisher</td>
+                <td>
+                    <button class="btn btn-lg btn-basic btn-block" onclick="location.href = '/home/checkoutBook/@ViewBag.CurrentUser.CardNo';">Books</button>
+                </td>
+                </tr>
+            }
+        </table>
+
+</body>
+</html>

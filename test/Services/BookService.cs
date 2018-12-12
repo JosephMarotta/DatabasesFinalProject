@@ -14,10 +14,10 @@ namespace test.Services
         {
             List<Book> Books = new List<Book>();
 
-            string conString = "User Id=system;Password=furgpet1;Data Source=LAPTOP-JOE";
+            string conString = "User Id=myers;Password=006124432;Data Source=dataserv.mscs.mu.edu:1521/orcl";
             OracleConnection conn = new OracleConnection(conString);
             conn.Open();
-            string sqlCmd = "select * from BOOK";
+            string sqlCmd = "SELECT * FROM BOOK";
             OracleCommand cmd = new OracleCommand(sqlCmd, conn);
             cmd.CommandType = CommandType.Text;
 
@@ -41,6 +41,14 @@ namespace test.Services
             conn.Dispose();
 
             return Books;
+        }
+
+        public void Checkout(string BookId, string CardNo)
+        {
+            string conString = "User Id=myers;Password=006124432;Data Source=dataserv.mscs.mu.edu:1521/orcl";
+            OracleConnection conn = new OracleConnection(conString);
+            conn.Open();
+            string sqlcmd = "select b.BookId, b.Title from Book b, Book_copies c where b.BookId = c.BookId";
         }
     }
 }

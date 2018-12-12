@@ -28,7 +28,7 @@ namespace test.Controllers
             ViewBag.CurrentUser = _BorrowerService.GetBorrower(CardNo);
             List<Book> Books = _BookService.GetBooks();
 
-            return View(Books.ToList());
+            return View();
         }
 
         // GET: Home
@@ -71,5 +71,14 @@ namespace test.Controllers
 
             return View();
         }
+
+        public ActionResult Book(string CardNo)
+        {
+            ViewBag.CurrentUser = _BorrowerService.GetBorrower(CardNo);
+            List<Book> Books = _BookService.GetBooks();
+
+            return View(Books.ToList());
+        }
+
     }
 }
