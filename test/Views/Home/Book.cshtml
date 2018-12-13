@@ -9,27 +9,49 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Books</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link href="~/Styles/MasterStyles.css" rel="stylesheet" />
+    <link href="~/Styles/IndexStyles.css" rel="stylesheet" />
 </head>
 <body>
-    <div> <b>Available Books</b><br /><div>
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+        <div class="navbar-brand">The Library Web Application</div>
+        <button class="btn btn-outline-success my-2 my-sm-0" onclick="location.href = '/home/login';">Log Out</button>
+    </nav>
+    <div class="container">
         <table class="table table-bordered table-responsive table-hover">
-            <tr>
-                <th>Id</th>
-                <th>Title</th>
-                <th>Publisher</th>
-            </tr>
-            @foreach (var d in Model)
-            {
+            <thead>
                 <tr>
-                <td>@d.Id</td>
-                <td>@d.Title</td>
-                <td>@d.Publisher</td>
-                <td>
-                    <button class="btn btn-lg btn-basic btn-block" onclick="location.href = '/home/checkoutBook/@ViewBag.CurrentUser.CardNo';">Books</button>
-                </td>
+                    <th>Id</th>
+                    <th>Title</th>
+                    <th>Publisher</th>
+                    <th>Action</th>
                 </tr>
-            }
+            </thead>
+            <tbody>
+                @foreach (var d in Model)
+                {
+                    <tr>
+                        <td>@d.Id</td>
+                        <td>@d.Title</td>
+                        <td>@d.Publisher</td>
+                        <td>
+                            <button class="btn btn-lg btn-basic btn-block"
+                                    onclick="location.href = '/home/CheckoutBook/@ViewBag.CurrentUser.CardNo/@d.Id';">
+                                Check Out
+                            </button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
         </table>
+    </div>
 
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 </body>
 </html>

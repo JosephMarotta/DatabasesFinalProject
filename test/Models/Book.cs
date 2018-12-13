@@ -11,6 +11,8 @@ namespace test.Models
         public string Title { get; set; }
         public string Publisher { get; set; }
 
+        public Book() { }
+
         public Book(int id, string title, string publisher)
         {
             Id = id;

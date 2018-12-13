@@ -15,8 +15,8 @@ namespace test
 
             routes.MapRoute(
                 name: "Default",
-                url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Home", action = "Login", id = UrlParameter.Optional }
+                url: "{controller}/{action}/{CardNo}/{BookId}",
+                defaults: new { controller = "Home", action = "Login", CardNo = UrlParameter.Optional, BookId = UrlParameter.Optional }
             );
         }
     }

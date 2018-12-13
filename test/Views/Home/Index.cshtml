@@ -1,4 +1,4 @@
-﻿@model IEnumerable<test.Models.Book>
+﻿@model IEnumerable<test.Models.BookLoan>
 
 <!DOCTYPE html>
 
@@ -27,15 +27,33 @@
         <div class="row index-body">
             <!-- User Functions -->
             <div class="col-sm-6 Profile">
-                <h5> Your Profile </h5>
+                <h5> Currently Checked Out Books </h5>
+                <table class="table table-striped" style="background-color: white;">
+                    <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>DateOut</th>
+                            <th>DueDate</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                        <tr>
+                            <td>@item.Title</td>
+                            <td>@item.DateOut</td>
+                            <td>@item.DueDate</td>
+                        </tr>
+                        }
+                    </tbody>
+                </table>
             </div>
             <div class="col-sm-2"></div>
             <!-- Library Functions -->
             <div class="col-sm-4 Library">
                 <h5> Library Functions </h5>
-                <button class="btn btn-lg btn-basic btn-block" onclick="location.href = '/home/book/@ViewBag.CurrentUser.CardNo';">Books</button>
-                <button class="btn btn-lg btn-info btn-block">Branches</button>
-                <button class="btn btn-lg btn-primary btn-block">Borrowers</button>
+                <button class="btn btn-lg btn-basic btn-block" onclick="location.href = '/home/book/@ViewBag.CurrentUser.CardNo';">View and Checkout Books</button>
+                <button class="btn btn-lg btn-info btn-block" onclick="alert('Not yet implemented');">View Branches</button>
             </div>
         </div>
     </div>

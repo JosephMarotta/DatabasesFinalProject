@@ -26,9 +26,10 @@ namespace test.Controllers
         public ActionResult Index(string CardNo)
         {
             ViewBag.CurrentUser = _BorrowerService.GetBorrower(CardNo);
-            List<Book> Books = _BookService.GetBooks();
 
-            return View();
+            List<BookLoan> BookLoans = _BookService.GetBorrowerBooks(CardNo);
+
+            return View(BookLoans.ToList());
         }
 
         // GET: Home
@@ -65,6 +66,7 @@ namespace test.Controllers
             return RedirectToAction("/Success/", new { CardNo = test.CardNo });
         }
 
+        // GET: Home
         public ActionResult Success(string CardNo)
         {
             ViewBag.CurrentUser = _BorrowerService.GetBorrower(CardNo);
@@ -72,13 +74,36 @@ namespace test.Controllers
             return View();
         }
 
+        // GET: Home
         public ActionResult Book(string CardNo)
         {
             ViewBag.CurrentUser = _BorrowerService.GetBorrower(CardNo);
+            List<BookLoan> BookLoans = _BookService.GetBorrowerBooks(CardNo);
             List<Book> Books = _BookService.GetBooks();
 
+            foreach(BookLoan loan in BookLoans)
+            {
+                Books.Remove(Books.Single(s => s.Title.Equals(loan.Title)));
+            }
+            
             return View(Books.ToList());
         }
 
+        public ActionResult CheckoutBook(string CardNo, int BookId)
+        {
+            Book check = _BookService.CheckoutBook(CardNo, BookId);
+
+            return RedirectToAction("/CheckoutSuccess/", new { CardNo = CardNo, BookId = check.Id });
+        }
+
+        // GET: Home
+        public ActionResult CheckoutSuccess(string CardNo, int BookId)
+        {
+            ViewBag.CurrentUser = _BorrowerService.GetBorrower(CardNo);
+            ViewBag.DueDate = DateTime.Now.AddMonths(1);
+            Book book = _BookService.GetBook(BookId);
+
+            return View(book);
+        }
     }
 }

@@ -26,13 +26,16 @@ body {
     border-radius: 10px;
 }
 
+.table {
+    background-color: white;
+}
+
 .Library {
     background-color: lightsteelblue;
     border-radius: 10px;
 }
 
 .Library .btn{
-    max-width: 250px;
     margin-top: 10px;
     margin-bottom: 10px;
 }
