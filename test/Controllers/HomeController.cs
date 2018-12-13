@@ -53,17 +53,23 @@ namespace test.Controllers
         }
 
         // GET: Home
-        public ActionResult Register()
+        [Route("Home/Login/{message?}")]
+        public ActionResult Register(string message = null)
         {
+            ViewBag.Message = message;
+
             return View();
         }
 
         [HttpPost]
         public ActionResult RegisterBorrower(string name, string address, string phoneNo, string password)
         {
-            Borrower test = _BorrowerService.RegisterBorrower(name, address, phoneNo, password);
+            if(password.Equals("") || name.Equals(""))
+                return RedirectToAction("/Register/", new { message = "Name and Password are required!" });
 
-            return RedirectToAction("/Success/", new { CardNo = test.CardNo });
+            Borrower Check = _BorrowerService.RegisterBorrower(name, address, phoneNo, password);
+
+            return RedirectToAction("/Success/", new { CardNo = Check.CardNo });
         }
 
         // GET: Home

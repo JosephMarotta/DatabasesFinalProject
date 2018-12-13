@@ -21,7 +21,8 @@
         <button class="btn btn-outline-success my-2 my-sm-0" onclick="location.href = '/home/login';">Log Out</button>
     </nav>
     <div class="container">
-        <table class="table table-bordered table-responsive table-hover">
+        <h3>Available Books</h3>
+        <table class="table table-bordered table-striped table-hover">
             <thead>
                 <tr>
                     <th>Id</th>
@@ -38,7 +39,7 @@
                         <td>@d.Title</td>
                         <td>@d.Publisher</td>
                         <td>
-                            <button class="btn btn-lg btn-basic btn-block"
+                            <button class="btn btn-lg btn-info btn-block"
                                     onclick="location.href = '/home/CheckoutBook/@ViewBag.CurrentUser.CardNo/@d.Id';">
                                 Check Out
                             </button>
